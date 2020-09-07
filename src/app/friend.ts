@@ -1,16 +1,9 @@
 export class Friend {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  favoriteLanguage: string;
-
-
-  constructor(firstName: string, lastName: string, email: string, phone: string, favoriteLanguage: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.phone = phone;
-    this.favoriteLanguage = favoriteLanguage;
-  }
+  constructor(
+    public firstName: string,
+    public lastName: string,
+    public email: string,
+    public phone: string,
+    public favoriteLanguage: string
+  ) {}
 }
