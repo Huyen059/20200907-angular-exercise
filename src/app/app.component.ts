@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'project-name';
+  languages = ['HTML', 'CSS', 'Javascript', 'PHP', 'Java', 'Python'];
 }
+
