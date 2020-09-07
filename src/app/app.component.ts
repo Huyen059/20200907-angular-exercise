@@ -10,5 +10,9 @@ export class AppComponent {
   title = 'project-name';
   languages = ['HTML', 'CSS', 'Javascript', 'PHP', 'Java', 'Python'];
   friendModel = new Friend('', '', '', '', '');
+  // tslint:disable-next-line:typedef
+  addFriend() {
+    console.log(this.friendModel);
+  }
 }
 

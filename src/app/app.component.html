@@ -1,7 +1,9 @@
 <!--  {{ friendModel | json }}-->
 <!-- Form -->
 <div class="container">
-  <form method="post" #friendForm="ngForm" name="friendForm" novalidate>
+  <form method="post" #friendForm="ngForm"
+        (ngSubmit)="addFriend()"
+        name="friendForm" novalidate>
     <div class="form-group">
       <label for="firstName">First Name</label>
       <input class="form-control" #firstName="ngModel" [class.error]="firstName.invalid && firstName.touched"
@@ -42,7 +44,9 @@
         <option *ngFor="let language of languages;" value="{{ language | lowercase }}">{{ language }}</option>
       </select>
     </div>
-    <button type="submit" id="submit" [disabled]="friendForm.form.invalid"
+    <button type="submit" id="submit"
+            [disabled]="friendForm.form.invalid"
+
             class="btn btn-primary w-100">Submit</button>
   </form>
 </div>
