@@ -1,8 +1,8 @@
 <!--  {{ friendModel | json }}-->
 <!-- Form -->
 <div class="container">
-  <div class="row">
-    <div class="col">
+  <div class="d-flex flex-column">
+    <div class="mb-5">
       <h1>Add a friend</h1>
       <form method="post" #friendForm="ngForm"
             (ngSubmit)="addFriend()"
@@ -53,18 +53,53 @@
         </button>
       </form>
     </div>
-    <div class="col">
-      <h1>Friends</h1>
-      <p>(Maximum number of friends to be displayed: 10)</p>
-      <div *ngFor="let friend of allFriends; index as i">
-        <div *ngIf="i <= 9" class="card mb-3" style="width: 20rem;">
+    <div class="mb-5">
+      <h1>Search by Email</h1>
+      <form method="post" #searchFriendForm="ngForm"
+            (ngSubmit)="searchFriendByEmail()"
+            name="searchFriendForm" novalidate>
+        <div class="form-group">
+          <label for="searchEmail">Email</label>
+          <input class="form-control" #searchEmail="ngModel" [class.error]="searchEmail.invalid && searchEmail.touched"
+                 [(ngModel)]="searchTerm"
+                 pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
+                 type="email" name="searchEmail" id="searchEmail" required="required">
+        </div>
+        <button type="submit"
+                [disabled]="searchFriendForm.form.invalid"
+                class="btn btn-primary w-100">Search
+        </button>
+      </form>
+      <div *ngIf="searchFriend">
+        <h4 class="text-center mt-4 mb-3">Search Result</h4>
+        <div class="card my-3 mx-auto" style="width: 20rem;">
           <div class="card-body">
-            <h5 class="card-title text-center bg-light p-3">{{ friend.firstName | uppercase }} {{ friend.lastName | uppercase }}</h5>
+            <h5
+              class="card-title text-center bg-light p-3">{{ searchFriend.firstName | uppercase }} {{ searchFriend.lastName | uppercase }}</h5>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Phone: {{ friend.phone }}</li>
-              <li class="list-group-item">Email: {{ friend.email }}</li>
-              <li class="list-group-item">Language: {{ friend.favoriteLanguage }}</li>
+              <li class="list-group-item">Phone: {{ sanitizePhone(searchFriend.phone) }}</li>
+              <li class="list-group-item">Email: {{ searchFriend.email }}</li>
+              <li class="list-group-item">Language: {{ searchFriend.favoriteLanguage }}</li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-5">
+      <h1>Friends</h1>
+      <p>(Maximum number of friends to be displayed: 100)</p>
+      <div class="d-flex">
+        <div *ngFor="let friend of allFriends; index as i">
+          <div *ngIf="i <= 99" class="card m-3" style="width: 20rem;">
+            <div class="card-body">
+              <h5
+                class="card-title text-center bg-light p-3">{{ friend.firstName | uppercase }} {{ friend.lastName | uppercase }}</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Phone: {{ sanitizePhone(friend.phone) }}</li>
+                <li class="list-group-item">Email: {{ friend.email }}</li>
+                <li class="list-group-item">Language: {{ friend.favoriteLanguage }}</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
