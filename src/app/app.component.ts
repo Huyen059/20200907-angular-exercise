@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Friend} from './friend';
 import {FriendsService} from './friends.service';
 
@@ -7,30 +7,12 @@ import {FriendsService} from './friends.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'project-name';
-  languages = ['HTML', 'CSS', 'Javascript', 'PHP', 'Java', 'Python'];
-  friendModel = new Friend('', '', '', '', '');
+export class AppComponent {
   searchEmail = '';
-  allFriends: Friend[];
   searchFriend: Friend;
   searchFriendError: string;
 
   constructor(private friendsService: FriendsService) {}
-
-  ngOnInit(): void {
-    this.getAllFriends();
-  }
-
-  addFriend(): void {
-    this.friendsService.add(this.friendModel)
-      .subscribe((friend: Friend) => this.allFriends.push(friend));
-  }
-
-  getAllFriends(): void {
-    this.friendsService.getAll()
-      .subscribe((friends: Friend[]) => this.allFriends = [...friends]);
-  }
 
   searchFriendByEmail(): void {
     this.searchFriend = null;

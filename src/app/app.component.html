@@ -1,114 +1,120 @@
 <!--  {{ friendModel | json }}-->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active">Contacts</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">
+            All Friends <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/add-friend" routerLinkActive="active">
+            Add A Friend
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<router-outlet></router-outlet>
 <!-- Form -->
-<div class="container">
-  <div class="d-flex flex-column">
-    <div class="mb-5">
-      <h1>Add a friend</h1>
-      <form method="post" #friendForm="ngForm"
-            (ngSubmit)="addFriend()"
-            name="friendForm" novalidate>
-        <div class="form-group">
-          <label for="firstName">First Name</label>
-          <input class="form-control" #firstName="ngModel" [class.error]="firstName.invalid && firstName.touched"
-                 [(ngModel)]="friendModel.firstName"
-                 pattern="^[A-z]*((-|\s)*[A-z])*$"
-                 type="text" name="firstName" id="firstName" required="required">
-        </div>
-        <div class="form-group">
-          <label for="lastName">Last Name</label>
-          <input class="form-control" #lastName="ngModel" [class.error]="lastName.invalid && lastName.touched"
-                 [(ngModel)]="friendModel.lastName"
-                 pattern="^[A-z]*((-|\s)*[A-z])*$"
-                 type="text" name="lastName" id="lastName" required="required">
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input class="form-control" #email="ngModel" [class.error]="email.invalid && email.touched"
-                 [(ngModel)]="friendModel.email"
-                 pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
-                 type="email" name="email" id="email" required="required">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input class="form-control" #phone="ngModel" [class.error]="phone.invalid && phone.touched"
-                 [(ngModel)]="friendModel.phone"
-                 pattern="^(\+32|0)(?:[-\s]*[0-9]){9}$"
-                 placeholder="+32... or 0..."
-                 type="text" name="phone" id="phone" required="required">
-        </div>
-        <div class="form-group">
-          <label for="favoriteLanguage">Favorite Languages</label>
-          <select class="form-control" #favoriteLanguage="ngModel"
-                  [class.error]="favoriteLanguage.invalid && favoriteLanguage.touched"
-                  [(ngModel)]="friendModel.favoriteLanguage"
-                  name="favoriteLanguage" id="favoriteLanguage"
-                  required="required">
-            <option value="" selected disabled>Choose a language</option>
-            <option *ngFor="let language of languages;" value="{{ language | lowercase }}">{{ language }}</option>
-          </select>
-        </div>
-        <button type="submit" id="submit"
-                [disabled]="friendForm.form.invalid"
-                class="btn btn-primary w-100">Submit
-        </button>
-      </form>
-    </div>
-    <div class="mb-5">
-      <h1>Search by Email</h1>
-      <form method="post" #searchFriendForm="ngForm"
-            (ngSubmit)="searchFriendByEmail()"
-            name="searchFriendForm" novalidate>
-        <div class="form-group">
-          <label for="searchEmail">Email</label>
-          <input class="form-control" #emailToSearch="ngModel" [class.error]="emailToSearch.invalid && emailToSearch.touched"
-                 [(ngModel)]="searchEmail"
-                 pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
-                 type="email" name="searchEmail" id="searchEmail" required="required">
-        </div>
-        <button type="submit"
-                [disabled]="searchFriendForm.form.invalid"
-                class="btn btn-primary w-100">Search
-        </button>
-      </form>
-      <div *ngIf="searchFriend">
-        <h4 class="text-center mt-4 mb-3">Search Result</h4>
-        <div class="card my-3 mx-auto" style="width: 20rem;">
-          <div class="card-body">
-            <h5
-              class="card-title text-center bg-light p-3">{{ searchFriend.firstName | uppercase }} {{ searchFriend.lastName | uppercase }}</h5>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Phone: {{ searchFriend.phone | sanitizePhone }}</li>
-              <li class="list-group-item">Email: {{ searchFriend.email }}</li>
-              <li class="list-group-item">Language: {{ searchFriend.favoriteLanguage }}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="searchFriendError">
-        {{ searchFriendError }}
-      </div>
-    </div>
-    <div class="mb-5">
-      <h1>Friends</h1>
-      <p>(Maximum number of friends to be displayed: 100)</p>
-      <div class="d-flex flex-wrap justify-content-center">
-        <div *ngFor="let friend of allFriends; index as i">
-          <div *ngIf="i <= 99" class="card m-3" style="width: 20rem;">
-            <div class="card-body">
-              <h5
-                class="card-title text-center bg-light p-3">{{ friend.firstName | uppercase }} {{ friend.lastName | uppercase }}</h5>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Phone: {{ friend.phone | sanitizePhone }}</li>
-                <li class="list-group-item">Email: {{ friend.email }}</li>
-                <li class="list-group-item">Language: {{ friend.favoriteLanguage }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div class="container">-->
+<!--  <div class="d-flex flex-column">-->
+<!--    <div class="mb-5">-->
+<!--      <h1>Add a friend</h1>-->
+<!--      <form method="post" #friendForm="ngForm"-->
+<!--            (ngSubmit)="addFriend()"-->
+<!--            name="friendForm" novalidate>-->
+<!--        <div class="form-group">-->
+<!--          <label for="firstName">First Name</label>-->
+<!--          <input class="form-control" #firstName="ngModel" [class.error]="firstName.invalid && firstName.touched"-->
+<!--                 [(ngModel)]="friendModel.firstName"-->
+<!--                 pattern="^[A-z]*((-|\s)*[A-z])*$"-->
+<!--                 type="text" name="firstName" id="firstName" required="required">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="lastName">Last Name</label>-->
+<!--          <input class="form-control" #lastName="ngModel" [class.error]="lastName.invalid && lastName.touched"-->
+<!--                 [(ngModel)]="friendModel.lastName"-->
+<!--                 pattern="^[A-z]*((-|\s)*[A-z])*$"-->
+<!--                 type="text" name="lastName" id="lastName" required="required">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="email">Email</label>-->
+<!--          <input class="form-control" #email="ngModel" [class.error]="email.invalid && email.touched"-->
+<!--                 [(ngModel)]="friendModel.email"-->
+<!--                 pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"-->
+<!--                 type="email" name="email" id="email" required="required">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="phone">Phone</label>-->
+<!--          <input class="form-control" #phone="ngModel" [class.error]="phone.invalid && phone.touched"-->
+<!--                 [(ngModel)]="friendModel.phone"-->
+<!--                 pattern="^(\+32|0)(?:[-\s]*[0-9]){9}$"-->
+<!--                 placeholder="+32... or 0..."-->
+<!--                 type="text" name="phone" id="phone" required="required">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="favoriteLanguage">Favorite Languages</label>-->
+<!--          <select class="form-control" #favoriteLanguage="ngModel"-->
+<!--                  [class.error]="favoriteLanguage.invalid && favoriteLanguage.touched"-->
+<!--                  [(ngModel)]="friendModel.favoriteLanguage"-->
+<!--                  name="favoriteLanguage" id="favoriteLanguage"-->
+<!--                  required="required">-->
+<!--            <option value="" selected disabled>Choose a language</option>-->
+<!--            <option *ngFor="let language of languages;" value="{{ language | lowercase }}">{{ language }}</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--        <button type="submit" id="submit"-->
+<!--                [disabled]="friendForm.form.invalid"-->
+<!--                class="btn btn-primary w-100">Submit-->
+<!--        </button>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--    <div class="mb-5">-->
+<!--      <h1>Search by Email</h1>-->
+<!--      <form method="post" #searchFriendForm="ngForm"-->
+<!--            (ngSubmit)="searchFriendByEmail()"-->
+<!--            name="searchFriendForm" novalidate>-->
+<!--        <div class="form-group">-->
+<!--          <label for="searchEmail">Email</label>-->
+<!--          <input class="form-control" #emailToSearch="ngModel" [class.error]="emailToSearch.invalid && emailToSearch.touched"-->
+<!--                 [(ngModel)]="searchEmail"-->
+<!--                 pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"-->
+<!--                 type="email" name="searchEmail" id="searchEmail" required="required">-->
+<!--        </div>-->
+<!--        <button type="submit"-->
+<!--                [disabled]="searchFriendForm.form.invalid"-->
+<!--                class="btn btn-primary w-100">Search-->
+<!--        </button>-->
+<!--      </form>-->
+<!--      <div *ngIf="searchFriend">-->
+<!--        <h4 class="text-center mt-4 mb-3">Search Result</h4>-->
+<!--        <div class="card my-3 mx-auto" style="width: 20rem;">-->
+<!--          <div class="card-body">-->
+<!--            <h5-->
+<!--              class="card-title text-center bg-light p-3">{{ searchFriend.firstName | uppercase }} {{ searchFriend.lastName | uppercase }}</h5>-->
+<!--            <ul class="list-group list-group-flush">-->
+<!--              <li class="list-group-item">Phone: {{ searchFriend.phone | sanitizePhone }}</li>-->
+<!--              <li class="list-group-item">Email: {{ searchFriend.email }}</li>-->
+<!--              <li class="list-group-item">Language: {{ searchFriend.favoriteLanguage }}</li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div *ngIf="searchFriendError">-->
+<!--        {{ searchFriendError }}-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
 
 
 
