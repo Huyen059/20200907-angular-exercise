@@ -13,9 +13,10 @@ export class AppComponent implements OnInit {
   title = 'project-name';
   languages = ['HTML', 'CSS', 'Javascript', 'PHP', 'Java', 'Python'];
   friendModel = new Friend('', '', '', '', '');
-  searchTerm = '';
-  allFriends: any = [];
-  searchFriend: object;
+  searchEmail = '';
+  allFriends: Friend[];
+  searchFriend: Friend;
+  searchFriendError: string;
 
   constructor(private friendsService: FriendsService, private http: HttpClient) {}
 
@@ -33,17 +34,14 @@ export class AppComponent implements OnInit {
       .subscribe((friends: Friend[]) => this.allFriends = [...friends]);
   }
 
-  async searchFriendByEmail(): Promise<any> {
-    const url = 'http://localhost:9000/findFriend?email=' + this.searchTerm;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
-    return await this.http.get(url, httpOptions).toPromise().then(friend => {
-      this.searchFriend = friend;
-      console.log(friend);
-    });
+  searchFriendByEmail(): void {
+    this.searchFriend = null;
+    this.searchFriendError = null;
+    this.friendsService.searchByEmail(this.searchEmail)
+      .subscribe(
+        (friend: Friend) => this.searchFriend = friend,
+        error => this.searchFriendError = error
+      );
   }
 
   sanitizePhone(inputNumber: string): string {

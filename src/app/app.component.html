@@ -60,8 +60,8 @@
             name="searchFriendForm" novalidate>
         <div class="form-group">
           <label for="searchEmail">Email</label>
-          <input class="form-control" #searchEmail="ngModel" [class.error]="searchEmail.invalid && searchEmail.touched"
-                 [(ngModel)]="searchTerm"
+          <input class="form-control" #emailToSearch="ngModel" [class.error]="emailToSearch.invalid && emailToSearch.touched"
+                 [(ngModel)]="searchEmail"
                  pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
                  type="email" name="searchEmail" id="searchEmail" required="required">
         </div>
@@ -83,6 +83,9 @@
             </ul>
           </div>
         </div>
+      </div>
+      <div *ngIf="searchFriendError">
+        {{ searchFriendError }}
       </div>
     </div>
     <div class="mb-5">

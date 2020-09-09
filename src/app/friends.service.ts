@@ -39,4 +39,12 @@ export class FriendsService {
         catchError(this.httpErrorHandler.handleError)
       );
   }
+
+  searchByEmail(email): Observable<Friend>{
+    const url = 'findFriendByEmail?email=';
+    return this.http.get<Friend>(this.baseUrl + url + email, httpOptions)
+      .pipe(
+        catchError(this.httpErrorHandler.handleError)
+      );
+  }
 }
