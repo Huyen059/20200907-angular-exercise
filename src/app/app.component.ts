@@ -20,26 +20,17 @@ export class AppComponent implements OnInit {
   constructor(private friendsService: FriendsService, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.getAllFriends('http://localhost:9000/allFriends');
+    this.getAllFriends();
   }
 
   addFriend(): void {
     this.friendsService.add(this.friendModel)
-      .subscribe((friend: Friend) => {
-        this.allFriends.push(friend);
-    });
+      .subscribe((friend: Friend) => this.allFriends.push(friend));
   }
 
-  async getAllFriends(url: string): Promise<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
-    return await this.http.get(url, httpOptions).toPromise()
-      .then(data => {
-        this.allFriends = data;
-      });
+  getAllFriends(): void {
+    this.friendsService.getAll()
+      .subscribe((friends: Friend[]) => this.allFriends = [...friends]);
   }
 
   async searchFriendByEmail(): Promise<any> {

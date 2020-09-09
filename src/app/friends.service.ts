@@ -32,5 +32,11 @@ export class FriendsService {
   }
 
 //  GET
-
+  getAll(): Observable<Friend[]>{
+    const url = 'allFriends';
+    return this.http.get<Friend[]>(this.baseUrl + url, httpOptions)
+      .pipe(
+        catchError(this.httpErrorHandler.handleError)
+      );
+  }
 }
