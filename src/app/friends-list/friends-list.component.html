@@ -1,0 +1,19 @@
+<div class="mb-5">
+  <h1>Friends</h1>
+  <p>(Maximum number of friends to be displayed: 100)</p>
+  <div class="d-flex flex-wrap justify-content-center">
+    <div *ngFor="let friend of allFriends; index as i">
+      <div *ngIf="i <= 99" class="card m-3" style="width: 20rem;">
+        <div class="card-body">
+          <h5
+            class="card-title text-center bg-light p-3">{{ friend.firstName | uppercase }} {{ friend.lastName | uppercase }}</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Phone: {{ friend.phone | sanitizePhone }}</li>
+            <li class="list-group-item">Email: {{ friend.email }}</li>
+            <li class="list-group-item">Language: {{ friend.favoriteLanguage }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

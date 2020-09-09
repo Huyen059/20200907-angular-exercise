@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Friend} from './friend';
-import {HttpClient} from '@angular/common/http';
-import {HttpHeaders} from '@angular/common/http';
 import {FriendsService} from './friends.service';
 
 @Component({
@@ -18,7 +16,7 @@ export class AppComponent implements OnInit {
   searchFriend: Friend;
   searchFriendError: string;
 
-  constructor(private friendsService: FriendsService, private http: HttpClient) {}
+  constructor(private friendsService: FriendsService) {}
 
   ngOnInit(): void {
     this.getAllFriends();

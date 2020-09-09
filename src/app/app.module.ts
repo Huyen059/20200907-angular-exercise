@@ -6,10 +6,14 @@ import {AppComponent} from './app.component';
 
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { FriendsListComponent } from './friends-list/friends-list.component';
+import { SanitizePhonePipe } from './sanitize-phone.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FriendsListComponent,
+    SanitizePhonePipe
   ],
   imports: [
     BrowserModule,
