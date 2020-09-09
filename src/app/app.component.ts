@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Friend} from './friend';
-// import {AddFriendService} from './add-friend.service';
 import {HttpClient} from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
 import {FriendsService} from './friends.service';
@@ -25,9 +24,9 @@ export class AppComponent implements OnInit {
   }
 
   addFriend(): void {
-    this.friendsService.addFriend(this.friendModel)
-      .subscribe(() => {
-        this.getAllFriends('http://localhost:9000/allFriends');
+    this.friendsService.add(this.friendModel)
+      .subscribe((friend: Friend) => {
+        this.allFriends.push(friend);
     });
   }
 

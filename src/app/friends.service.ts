@@ -23,7 +23,7 @@ export class FriendsService {
   ) { }
 
 //  POST
-  addFriend(friend: Friend): Observable<Friend>{
+  add(friend: Friend): Observable<Friend>{
     const url = 'addFriend';
     return this.http.post<Friend>(this.baseUrl + url, friend, httpOptions)
       .pipe(
@@ -32,4 +32,5 @@ export class FriendsService {
   }
 
 //  GET
+
 }
