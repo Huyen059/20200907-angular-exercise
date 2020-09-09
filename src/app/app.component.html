@@ -1,5 +1,4 @@
 <!--  {{ friendModel | json }}-->
-<app-friends-list></app-friends-list>
 <!-- Form -->
 <div class="container">
   <div class="d-flex flex-column">
@@ -78,7 +77,7 @@
             <h5
               class="card-title text-center bg-light p-3">{{ searchFriend.firstName | uppercase }} {{ searchFriend.lastName | uppercase }}</h5>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Phone: {{ sanitizePhone(searchFriend.phone) }}</li>
+              <li class="list-group-item">Phone: {{ searchFriend.phone | sanitizePhone }}</li>
               <li class="list-group-item">Email: {{ searchFriend.email }}</li>
               <li class="list-group-item">Language: {{ searchFriend.favoriteLanguage }}</li>
             </ul>
@@ -99,7 +98,7 @@
               <h5
                 class="card-title text-center bg-light p-3">{{ friend.firstName | uppercase }} {{ friend.lastName | uppercase }}</h5>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Phone: {{ sanitizePhone(friend.phone) }}</li>
+                <li class="list-group-item">Phone: {{ friend.phone | sanitizePhone }}</li>
                 <li class="list-group-item">Email: {{ friend.email }}</li>
                 <li class="list-group-item">Language: {{ friend.favoriteLanguage }}</li>
               </ul>

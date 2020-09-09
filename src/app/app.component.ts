@@ -41,9 +41,5 @@ export class AppComponent implements OnInit {
         error => this.searchFriendError = error
       );
   }
-
-  sanitizePhone(inputNumber: string): string {
-    return  inputNumber.replace(/[^+0-9]/g, '');
-  }
 }
 
