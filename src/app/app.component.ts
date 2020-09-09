@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Friend} from './friend';
-import {AddFriendService} from './add-friend.service';
-import {HttpClient, HttpParams} from '@angular/common/http';
+// import {AddFriendService} from './add-friend.service';
+import {HttpClient} from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
-import {URLSearchParams} from 'url';
+import {FriendsService} from './friends.service';
 
 @Component({
   selector: 'app-root',
@@ -18,16 +18,15 @@ export class AppComponent implements OnInit {
   allFriends: any = [];
   searchFriend: object;
 
-  constructor(private addFriendService: AddFriendService, private http: HttpClient) {}
+  constructor(private friendsService: FriendsService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.getAllFriends('http://localhost:9000/allFriends');
-    // this.searchFriendByEmail('http://localhost:9000/findFriend?email=tim.broos@becode.org');
   }
 
   addFriend(): void {
-    this.addFriendService.addFriend(this.friendModel)
-      .subscribe((data: Friend) => {
+    this.friendsService.addFriend(this.friendModel)
+      .subscribe(() => {
         this.getAllFriends('http://localhost:9000/allFriends');
     });
   }
@@ -45,7 +44,7 @@ export class AppComponent implements OnInit {
   }
 
   async searchFriendByEmail(): Promise<any> {
-    let url = 'http://localhost:9000/findFriend?email=' + this.searchTerm;
+    const url = 'http://localhost:9000/findFriend?email=' + this.searchTerm;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'

@@ -1,3 +1,11 @@
+# Notes
+- Example of http requests: https://stackblitz.com/angular/oevaymgooko?file=src%2Fapp%2Fheroes%2Fheroes.service.ts
+
+
+
+
+
+
 # ProjectName
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
