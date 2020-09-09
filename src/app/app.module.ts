@@ -9,13 +9,15 @@ import {HttpClientModule} from '@angular/common/http';
 import { FriendsListComponent } from './friends-list/friends-list.component';
 import { SanitizePhonePipe } from './sanitize-phone.pipe';
 import { AddFriendComponent } from './add-friend/add-friend.component';
+import { SearchFriendComponent } from './search-friend/search-friend.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FriendsListComponent,
     SanitizePhonePipe,
-    AddFriendComponent
+    AddFriendComponent,
+    SearchFriendComponent
   ],
   imports: [
     BrowserModule,

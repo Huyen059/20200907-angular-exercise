@@ -1,0 +1,35 @@
+<div class="mb-5">
+  <h1>Search by Email</h1>
+  <form method="post" #searchFriendForm="ngForm"
+        (ngSubmit)="searchFriendByEmail()"
+        name="searchFriendForm" novalidate>
+    <div class="form-group">
+      <label for="searchEmail">Email</label>
+      <input class="form-control" #emailToSearch="ngModel" [class.error]="emailToSearch.invalid && emailToSearch.touched"
+             [(ngModel)]="searchEmail"
+             pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
+             type="email" name="searchEmail" id="searchEmail" required="required">
+    </div>
+    <button type="submit"
+            [disabled]="searchFriendForm.form.invalid"
+            class="btn btn-primary w-100">Search
+    </button>
+  </form>
+  <div *ngIf="searchFriend">
+    <h4 class="text-center mt-4 mb-3">Search Result</h4>
+    <div class="card my-3 mx-auto" style="width: 20rem;">
+      <div class="card-body">
+        <h5
+          class="card-title text-center bg-light p-3">{{ searchFriend.firstName | uppercase }} {{ searchFriend.lastName | uppercase }}</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Phone: {{ searchFriend.phone | sanitizePhone }}</li>
+          <li class="list-group-item">Email: {{ searchFriend.email }}</li>
+          <li class="list-group-item">Language: {{ searchFriend.favoriteLanguage }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="searchFriendError">
+    {{ searchFriendError }}
+  </div>
+</div>
